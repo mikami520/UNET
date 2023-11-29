@@ -2,7 +2,7 @@
 Author: Chris Xiao yl.xiao@mail.utoronto.ca
 Date: 2023-11-28 13:49:29
 LastEditors: Chris Xiao yl.xiao@mail.utoronto.ca
-LastEditTime: 2023-11-28 21:01:24
+LastEditTime: 2023-11-28 21:20:33
 FilePath: /UNET/train.py
 Description: 
 I Love IU
