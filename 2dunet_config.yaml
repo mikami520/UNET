@@ -1,4 +1,4 @@
-experiment: UNet-Liver
+experiment: 2D UNet Liver
 
 # Model
 model:
@@ -25,14 +25,7 @@ opt_params:
 max_iter: 200
 val_iter: 5
 # Dataloader  
-train_bs: 4 # 8
-val_bs: 8 # 8
+train_bs: 64 # 8
+val_bs: 128 # 8
 test_bs: 1
 num_workers: 16
-
-# Logger
-log_folder: '/home/iu/Downloads/Liver/experiment/log'
-model_folder: '/home/iu/Downloads/Liver/experiment/model'
-ckpt_folder: '/home/iu/Downloads/Liver/experiment/checkpoint'
-plot_folder: '/home/iu/Downloads/Liver/experiment/plots'
-test_folder: '/home/iu/Downloads/Liver/experiment/inference'

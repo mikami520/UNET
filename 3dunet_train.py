@@ -2,17 +2,13 @@
 Author: Chris Xiao yl.xiao@mail.utoronto.ca
 Date: 2023-11-28 13:49:29
 LastEditors: Chris Xiao yl.xiao@mail.utoronto.ca
-LastEditTime: 2023-11-28 21:20:33
-FilePath: /UNET/train.py
+LastEditTime: 2023-11-28 22:36:40
+FilePath: /UNET/3dunet_train.py
 Description: 
 I Love IU
 Copyright (c) 2023 by Chris Xiao yl.xiao@mail.utoronto.ca, All Rights Reserved. 
 '''
 import monai
-from monai.transforms import (
-    AsDiscrete,
-    Compose,
-)
 import glob
 import torch
 from monai.networks.nets import UNet
@@ -115,13 +111,16 @@ if __name__ == '__main__':
     
     # setup folders
     exp = cfg.experiment
-    root_dir = cfg.dataset.dataset_dir
-    model_path = os.path.join(root_dir, 'experiment')
-    log_path = cfg.log_folder
-    ckpt_path = cfg.ckpt_folder
-    plot_path = cfg.plot_folder
-    test_path = cfg.test_folder
+    root_dir = os.path.join(cfg.dataset.dataset_dir, '3D')
+    exp_path = os.path.join(root_dir, exp)
+    log_path = os.path.join(exp_path, 'log')
+    ckpt_path = os.path.join(exp_path, 'checkpoint')
+    plot_path = os.path.join(exp_path, 'plot')
+    test_path = os.path.join(exp_path, 'inference')
+    model_path = os.path.join(exp_path, 'model')
+    
     if not resume:
+        make_if_dont_exist(exp_path, overwrite=True)
         make_if_dont_exist(model_path, overwrite=True)
         make_if_dont_exist(log_path, overwrite=True)
         make_if_dont_exist(ckpt_path, overwrite=True)
@@ -167,8 +166,7 @@ if __name__ == '__main__':
         include_background=False,
         reduction="mean"
     )
-    post_pred = Compose([AsDiscrete(argmax=True, to_onehot=cfg.model.class_num)])
-    post_label = Compose([AsDiscrete(to_onehot=cfg.model.class_num)])
+
     if resume:
         ckpt = torch.load(os.path.join(ckpt_path, 'ckpt.pth'), map_location=device)
         optimizer.load_state_dict(ckpt['optimizer'])
@@ -180,8 +178,6 @@ if __name__ == '__main__':
         lr = optimizer.param_groups[0]['lr']
         start_epoch = ckpt['epoch'] + 1
         logger.info("Resume Training")
-        print(best_val_score)
-        exit(0)
     else:
         logger.info("Start Training")
         
@@ -232,7 +228,7 @@ if __name__ == '__main__':
 
             if metric > best_val_score:
                 best_val_score = metric
-                save_checkpoint(model, optimizer, epoch, best_val_score, train_losses, val_losses, scores, os.path.join(ckpt_path, 'model.pth'))
+                save_checkpoint(model, optimizer, epoch, best_val_score, train_losses, val_losses, scores, os.path.join(model_path, 'model.pth'))
                 logger.info(f"Save Best Model at Epoch {epoch+1}")
         save_checkpoint(model, optimizer, epoch, best_val_score, train_losses, val_losses, scores, os.path.join(ckpt_path, 'ckpt.pth'))
         plot_progress(logger, plot_path, train_losses, val_losses, scores, 'metrics')
