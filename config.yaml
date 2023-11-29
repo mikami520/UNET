@@ -1,0 +1,38 @@
+experiment: UNet-Liver
+
+# Model
+model:
+  class_num: 2 # 1 + 1
+  channels: [8,16,16,32,32,64,64]
+  strides: [1,2,1,2,1,2] 
+
+# Dataset
+dataset:
+    dataset_dir: '/home/iu/Downloads/Liver'
+
+# Losses
+losses:
+  ce:
+    weight: 0.5
+  dice:
+    weight: 0.5
+    
+# Optimizer
+opt_params:
+  lr_default:  1e-4
+
+# Runner
+max_iter: 200
+val_iter: 5
+# Dataloader  
+train_bs: 4 # 8
+val_bs: 8 # 8
+test_bs: 1
+num_workers: 16
+
+# Logger
+log_folder: '/home/iu/Downloads/Liver/experiment/log'
+model_folder: '/home/iu/Downloads/Liver/experiment/model'
+ckpt_folder: '/home/iu/Downloads/Liver/experiment/checkpoint'
+plot_folder: '/home/iu/Downloads/Liver/experiment/plots'
+test_folder: '/home/iu/Downloads/Liver/experiment/inference'
