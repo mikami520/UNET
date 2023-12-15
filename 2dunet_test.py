@@ -2,7 +2,7 @@
 Author: Chris Xiao yl.xiao@mail.utoronto.ca
 Date: 2023-12-15 18:05:25
 LastEditors: Chris Xiao yl.xiao@mail.utoronto.ca
-LastEditTime: 2023-12-15 18:37:42
+LastEditTime: 2023-12-15 18:45:11
 FilePath: /UNET/2dunet_test.py
 Description: 
 I Love IU
@@ -135,9 +135,7 @@ if __name__ == '__main__':
             pred_mesh = Meshes(verts=pred_verts, faces=pred_faces)
             gt_mesh = Meshes(verts=gt_verts, faces=gt_faces)
             spacing = batch['seg_meta_dict']['pixdim'][0,1:4]
-            # origin = np.array([0., 0., 0.])
-            # direction = np.array([[1., 0., 0.], [0., 1., 0.], [0., 0., 1.]])
-            # ants_seg = ants.from_numpy(output_save, origin=origin, spacing=spacing, direction=direction)
+
             results[str(i)]['dsc'] = dice_score(onehot_pred, seg).detach().cpu().numpy()[0,0]
             results[str(i)]['asd'] = average_surface_distance(onehot_pred, seg).detach().cpu().numpy()[0,0]
             results[str(i)]['hd'] = hausdorff_distance(onehot_pred, seg).detach().cpu().numpy()[0,0]
