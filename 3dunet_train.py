@@ -2,7 +2,7 @@
 Author: Chris Xiao yl.xiao@mail.utoronto.ca
 Date: 2023-11-28 13:49:29
 LastEditors: Chris Xiao yl.xiao@mail.utoronto.ca
-LastEditTime: 2023-11-28 22:36:40
+LastEditTime: 2023-12-15 15:07:17
 FilePath: /UNET/3dunet_train.py
 Description: 
 I Love IU
@@ -22,6 +22,7 @@ import logging
 import resource
 from tqdm import tqdm
 from monai.data import DataLoader, Dataset
+import pickle
 
 def parse_command():
     parser = argparse.ArgumentParser()
@@ -136,6 +137,8 @@ if __name__ == '__main__':
     train_dir = os.path.join(root_dir, 'train')
     test_dir = os.path.join(root_dir, 'test')
     tr_loader, va_loader, te_loader = dataset(cfg, train_dir, test_dir)
+    with open(os.path.join(exp_path, 'dataset.pkl'), 'wb') as f:
+        pickle.dump([tr_loader, va_loader, te_loader], f, protocol=pickle.HIGHEST_PROTOCOL)
     
     logger.info("Load Model-Specific Parameters")
     model = UNet(
