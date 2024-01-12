@@ -6,6 +6,6 @@ Multiple evaluation metrics are added to this tutorial:
 - Mean Dice Score
 - Mean Surface Distance
 - Mean Hausdorff Distance
-- Mean Surface Dice
+- Mean Surface Dice Score
 - Mean Chamfer Distance
 
