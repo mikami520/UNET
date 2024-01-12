@@ -3,7 +3,7 @@ The results trained and tested on Liver dataset from [Medical Segmentation Decat
 
 ## Metrics
 Multiple evaluation metrics are added to this tutorial:
-- Mean Dice Score,
+- Mean Dice Score
 - Mean Surface Distance
 - Mean Hausdorff Distance
 - Mean Surface Dice
