@@ -11,4 +11,18 @@ Multiple evaluation metrics are added to this tutorial:
 
 ## Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=mikami520/UNET&type=Date)](https://star-history.com/#mikami520/UNET&Date)
+<p align="center">
+  <a href="https://www.star-history.com/#mikami520/UNET&Date">
+   <picture>
+     <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=mikami520/UNET&type=Date&theme=dark" />
+     <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=mikami520/UNET&type=Date" />
+     <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=mikami520/UNET&type=Date" />
+   </picture>
+  </a>
+</p>
+
+---
+<div align="center">
+<p>Developed by Chris Xiao | University of Toronto</p>
+<p>© 2025 All Rights Reserved</p>
+</div>
